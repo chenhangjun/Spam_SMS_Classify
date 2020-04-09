@@ -1,2 +1,2 @@
 # Spam_SMS_Classify
-一个中文文本分类 (NLP)
+一个中文文本分类项目 (NLP)
