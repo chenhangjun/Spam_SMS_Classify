@@ -8,7 +8,11 @@ spam = 5041, ham = 44959
 初始模型准确度
 97.46%
 去掉异常样本后==> 97.52%
-去掉停用词 ==>   97.90%
+去掉停用词 ==>   准确率： 97.90%	/查准率： 94.40%
 
+threshold
+with Laplacial correction  		 ==> threshold = 0.4743 (CHECK)
+准确率： 95.90%  查准率： 98.72%
 
-
+without Laplacial correction  ==> threshold = 0.4663
+准确率： 95.81%  查准率： 98.54%
