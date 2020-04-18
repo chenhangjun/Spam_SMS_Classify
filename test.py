@@ -59,7 +59,7 @@ para = 0.4743
 NB = NaiveBayes()
 NB.fit(X_train, Y_train, para)
 
-count = 0
+count = 0 
 PSpam = 0
 TSpam = 0
 
