@@ -24,10 +24,12 @@ class NaiveBayes:
     # 先验概率 P(c)
     self.ham_probability = 0
     self.spam_probability = 0
+    self.para = 0
 
-  def fit(self, X_train, Y_train):
+  def fit(self, X_train, Y_train, para):
     self.build_words_set(X_train, Y_train)
     self.word_count()
+    self.para = para
 
 
   # 建立单词集合
@@ -76,15 +78,30 @@ class NaiveBayes:
     # P(x_i|c) = P(“某个词”|c) = (c类短信中出现“某个词”的次数的总和+1) /
     # c类短信中所有词出现次数（计算重复次数）的总和 + 总不重复的词语数量
 
-    ham_pro = 0
-    spam_pro = 0
+    ham_pro = 0.0
+    spam_pro = 0.0
 
     for word in sentence_words:
-      ham_pro += math.log((self.ham_map.get(word, 0) + 1) / (self.ham_count + self.words_set_size))
-      spam_pro += math.log((self.spam_map.get(word, 0) + 1) / (self.spam_count + self.words_set_size))
+      # if self.ham_map.get(word, 0) != 0:
+      #   ham_pro += math.log(self.ham_map.get(word, 0) / self.ham_words_count)
+      # else:
+      #   ham_pro += math.log((self.ham_map.get(word, 0) + 1) / (self.ham_words_count + self.words_set_size))
+      # if self.spam_map.get(word, 0) != 0:
+      #   spam_pro += math.log(self.spam_map.get(word, 0) / self.spam_words_count)
+      # else:
+      #   spam_pro += math.log((self.spam_map.get(word, 0) + 1) / (self.spam_words_count + self.words_set_size))
+
+      ham_pro += math.log((self.ham_map.get(word, 0) + 1) / (self.ham_words_count + self.words_set_size))
+      spam_pro += math.log((self.spam_map.get(word, 0) + 1) / (self.spam_words_count + self.words_set_size))
 
     ham_pro += math.log(self.ham_probability)
     spam_pro += math.log(self.spam_probability)
 
     # 1为spam, 0为ham，与标签一致
-    return int(spam_pro >= ham_pro)
+    # return int(spam_pro >= ham_pro)
+    tot = spam_pro + ham_pro
+    threshold = tot * self.para
+    if spam_pro >= threshold:
+      return 1
+    else :
+      return 0
