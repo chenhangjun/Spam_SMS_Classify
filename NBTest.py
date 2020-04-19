@@ -59,6 +59,10 @@ para = 0.4743
 NB = NaiveBayes()
 NB.fit(X_train, Y_train, para)
 
+NB.save()
+
+
+'''
 count = 0 
 PSpam = 0
 TSpam = 0
@@ -80,7 +84,7 @@ length = len(Y_test)
 print("With Laplacial correction")
 print("Threshold is %f" % para)
 print("准确率： %.2f%%  查准率： %.2f%%" %(((count / length) * 100),((TSpam / PSpam) * 100)))
-
+'''
 '''
   accuracy[i] = count / length * 100
   if TSpam == 0:

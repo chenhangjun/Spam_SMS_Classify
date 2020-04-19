@@ -1,4 +1,5 @@
 import math
+import json
 
 # 参考：https://www.cnblogs.com/liweiwei1419/p/9870956.html
 
@@ -105,3 +106,21 @@ class NaiveBayes:
       return 1
     else :
       return 0
+
+  def save(self):
+    dictObj = {'ham':self.ham_map, 'spam':self.spam_map}
+
+    jsObj = json.dumps(dictObj)
+
+    fileObject = open('modeldict.json', 'w')
+    fileObject.write(jsObj)
+    fileObject.close()
+
+    # print("ham_words_count = %d" %self.ham_words_count)
+    # print("spam_words_count = %d" % self.spam_words_count)
+    # print("ham_count = %d" %self.ham_count)
+    # print("spam_words_count = %d" %self.spam_count)
+    # print("words_set_size = %d" %self.words_set_size)
+
+
+
